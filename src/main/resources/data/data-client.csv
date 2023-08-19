@@ -1,0 +1,21 @@
+id,Identificacion,Nombres,Edad,Fecha_de_nacimiento,Apellidos,Direccion,Telefono,Estado_civil,Identificacion_del_conyugue,Nombre_del_conyugue,Sujeto_de_credito
+1,1001,Juan,30,1992-05-15,Perez,Av. Principal 123,555-1234,Casado,2001,Maria,Si
+2,1002,Ana,28,1994-02-20,Gomez,Calle Secundaria 456,555-5678,Soltero,,s/c,No
+3,1003,Carlos,45,1977-10-10,Rodriguez,Calle Principal 789,555-9876,Casado,2002,Laura,Si
+4,1005,Luis,40,1981-03-25,Fernandez,Av. Central 567,555-8765,Casado,2003,Andres,Si
+5,1006,Sofia,33,1988-09-12,Garcia,Calle Principal 321,555-6789,Soltero,,s/c,No
+6,1007,Diego,29,1992-12-30,Martínez,Calle Secundaria 654,555-2345,Soltero,,s/c,No
+7,1008,Valeria,26,1995-07-18,Ruiz,Av. Central 789,555-3456,Casado,2004,Lucas,Si
+8,1009,Manuel,50,1971-04-02,Fuentes,Av. Principal 987,555-7890,Casado,2005,Isabel,Si
+9,1010,Andrea,27,1994-11-08,Perez,Calle Secundaria 876,555-8901,Soltero,,s/c,No
+10,1011,Javier,38,1983-06-22,Ramirez,Calle Principal 543,555-6789,Casado,2006,Ana,Si
+11,1012,Natalia,31,1990-01-25,Diaz,Av. Central 876,555-4567,Casado,2007,Pablo,Sí
+12,1013,Daniel,23,1999-03-17,Sanchez,Calle Secundaria 765,555-9876,Soltero,,s/c,No
+13,1014,Carolina,34,1987-08-10,Ortega,Av. Principal 345,555-8765,Soltero,,s/c,No
+14,1015,David,42,1979-12-03,Vargas,Calle Central 234,555-2345,Casado,2008,Sara,Si
+15,1016,Isabella,25,1996-10-30,Chavez,Av. Secundaria 543,555-7890,Casado,2009,Alejandro,Si
+16,1018,Camila,39,1982-09-14,Valenzuela,Calle Central 432,555-4567,Casado,2010,Nicolas,Si
+17,1019,Felipe,30,1991-02-28,Torres,Calle Secundaria 987,555-8765,Casado,2011,Daniela,Si
+18,1020,Lorena,32,1989-06-16,Soto,Av. Central 567,555-2345,Casado,2012,Juan,Si
+19,1004,Maria,22,2001-08-05,Lopez,Av. Secundaria 234,555-4321,Soltero,,s/c,No
+20,1017,Marcelo,37,1984-07-07,Paredes,Av. Principal 654,555-8901,Soltero,,s/c,No
