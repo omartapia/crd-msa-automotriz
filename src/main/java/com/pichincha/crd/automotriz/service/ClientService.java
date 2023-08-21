@@ -1,19 +1,19 @@
 package com.pichincha.crd.automotriz.service;
 
 import com.pichincha.crd.automotriz.service.dto.ClientDto;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface ClientService {
 
 
-    ClientDto create(ClientDto clientDto);
+    Mono<ClientDto> create(ClientDto clientDto);
 
-    ClientDto update(Long id, ClientDto clientDto);
+    Mono<ClientDto> update(Long id, ClientDto clientDto);
 
     void delete(Long id);
 
-    ClientDto find(Long id);
+    Mono<ClientDto> find(Long id);
 
-    List<ClientDto> findAll();
+    Flux<ClientDto> findAll();
 }

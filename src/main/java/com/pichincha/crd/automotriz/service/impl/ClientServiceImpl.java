@@ -1,20 +1,16 @@
 package com.pichincha.crd.automotriz.service.impl;
 
-import com.pichincha.crd.automotriz.repository.BrandRepository;
 import com.pichincha.crd.automotriz.repository.ClientRepository;
-import com.pichincha.crd.automotriz.service.BrandService;
 import com.pichincha.crd.automotriz.service.ClientService;
-import com.pichincha.crd.automotriz.service.dto.BrandDto;
 import com.pichincha.crd.automotriz.service.dto.ClientDto;
-import com.pichincha.crd.automotriz.service.dto.entity.Brand;
 import com.pichincha.crd.automotriz.service.dto.entity.Client;
-import com.pichincha.crd.automotriz.service.mapper.BrandMapper;
 import com.pichincha.crd.automotriz.service.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,18 +24,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDto create(ClientDto brandDto) {
-        Client entity = repository.save(mapperToEntity(brandDto));
-        return mapperToDto(entity);
+    public Mono<ClientDto> create(ClientDto brandDto) {
+        return Mono.just(repository.save(mapperToEntity(brandDto)))
+                .map(entity -> mapperToDto(entity)) ;
     }
 
     @Override
-    public ClientDto update(Long id, ClientDto clientDto) {
-        return repository.findById(id).map(entity -> {
-            clientDto.setId(entity.getId());
-            return repository.save(mapperToEntity(clientDto));
-        }).map(entity -> mapperToDto(entity))
-                .orElseThrow(() -> new EntityNotFoundException("Brand not found."));
+    public Mono<ClientDto> update(Long id, ClientDto clientDto) {
+        return Mono.just(repository.findById(id))
+                .flatMap(client -> Mono.just(client
+                        .orElseThrow(() -> new EntityNotFoundException("Brand not found."))))
+                .flatMap(entity -> Mono.just(repository.save(mapperToEntity(clientDto))))
+                .map(entity -> mapperToDto(entity));
     }
 
     @Override
@@ -52,16 +48,20 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDto find(Long id) {
-        return repository.findById(id)
-                .map(entity -> mapperToDto(entity))
-                .orElseThrow(() -> new EntityNotFoundException("Brand not found."));
+    public Mono<ClientDto> find(Long id) {
+        return Mono.just(repository.findById(id))
+                .map(client -> client
+                        .map(entity -> mapperToDto(entity))
+                        .orElseThrow(() -> new EntityNotFoundException("Brand not found.")));
     }
 
     @Override
-    public List<ClientDto> findAll() {
-        return repository.findAll().stream().map(entity -> mapperToDto(entity))
-                .collect(Collectors.toList());
+    public Flux<ClientDto> findAll() {
+        return Flux.just(repository.findAll())
+                .flatMap(clients -> Flux.fromIterable(clients.stream()
+                        .map(entity -> mapperToDto(entity))
+                        .collect(Collectors.toList())));
+
     }
 
     private ClientDto mapperToDto(Client client) {

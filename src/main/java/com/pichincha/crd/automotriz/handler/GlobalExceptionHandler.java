@@ -6,7 +6,9 @@ import com.pichincha.crd.automotriz.exceptions.ConflictException;
 import com.pichincha.crd.automotriz.exceptions.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -55,6 +57,16 @@ public class GlobalExceptionHandler {
 
         ErrorMessage errorResponse = new ErrorMessage(errorMessage);
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(BindException.class)
+    public ResponseEntity<String> handleValidationException(BindException ex) {
+        BindingResult bindingResult = ex.getBindingResult();
+        FieldError fieldError = bindingResult.getFieldError();
+
+        String message = "Field validation error: '" + fieldError.getField() + "': " + fieldError.getDefaultMessage();
+        return ResponseEntity.badRequest().body(message);
     }
 
 }

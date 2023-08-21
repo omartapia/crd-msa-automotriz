@@ -25,7 +25,6 @@ public class YardController {
     }
 
     @PutMapping
-
     public YardDto create(@RequestBody @Valid YardDto yardDto) {
         return service.create(yardDto);
     }

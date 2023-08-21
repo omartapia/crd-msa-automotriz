@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -26,14 +28,14 @@ public class ClientController {
     @PutMapping
     @ApiResponses(value = {
             @ApiResponse(content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))})
-    public ClientDto create(@RequestBody @Valid ClientDto clientDto) {
+    public Mono<ClientDto> create(@RequestBody @Valid ClientDto clientDto) {
         return service.create(clientDto);
     }
 
     @PostMapping(ID)
     @ApiResponses(value = {
             @ApiResponse(content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))})
-    public ClientDto update(@PathVariable Long id, @RequestBody @Valid ClientDto clientDto) {
+    public Mono<ClientDto> update(@PathVariable Long id, @RequestBody @Valid ClientDto clientDto) {
         return service.update(id, clientDto);
     }
 
@@ -45,14 +47,14 @@ public class ClientController {
     @GetMapping(ID)
     @ApiResponses(value = {
             @ApiResponse(content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))})
-    public ClientDto find(@PathVariable Long id) {
+    public Mono<ClientDto> find(@PathVariable Long id) {
         return service.find(id);
     }
 
     @GetMapping
     @ApiResponses(value = {
             @ApiResponse(content = @io.swagger.v3.oas.annotations.media.Content(mediaType = "application/json"))})
-    public List<ClientDto> findAll() {
+    public Flux<ClientDto> findAll() {
         return service.findAll();
     }
 }
