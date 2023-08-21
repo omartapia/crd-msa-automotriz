@@ -32,8 +32,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Mono<ClientDto> update(Long id, ClientDto clientDto) {
         return Mono.just(repository.findById(id))
-                .flatMap(client -> Mono.just(client
-                        .orElseThrow(() -> new EntityNotFoundException("Brand not found."))))
+                .flatMap(client -> Mono.just(client.map(entity -> {
+                    clientDto.setId(entity.getId());
+                    return clientDto;
+                }).orElseThrow(() -> new EntityNotFoundException("Brand not found."))))
                 .flatMap(entity -> Mono.just(repository.save(mapperToEntity(clientDto))))
                 .map(entity -> mapperToDto(entity));
     }
